@@ -18,20 +18,19 @@ L'application affichera, sur son écran principal, une liste de tâches (todo). 
 modifier et supprimer une tâche, et indiquer qu'elle est terminée. Les tâches seront enregistrées
 sur le téléphone : elles restent après la fermeture de l'application.
 
-**État actuel :** la base du projet est en place (écran d'accueil, thème clair et sombre,
-composants). La liste de tâches est la prochaine étape.
+**État actuel :** la liste de tâches est terminée et testée (tests automatiques et émulateur Android).
 
 ---
 
 ### ✨ **Fonctionnalités**
 
 - ✅ Thème clair et sombre qui suit le réglage du téléphone, couleur d'accent verte
-- 🚧 Liste des tâches sur l'écran principal
-- 🚧 Créer une tâche
-- 🚧 Modifier une tâche
-- 🚧 Supprimer une tâche
-- 🚧 Marquer une tâche comme terminée
-- 🚧 Enregistrement des tâches sur le téléphone (elles restent après fermeture)
+- ✅ Liste des tâches sur l'écran principal, avec le nombre de tâches restantes
+- ✅ Créer une tâche (titre obligatoire, 100 caractères maximum)
+- ✅ Modifier une tâche (appui sur son titre)
+- ✅ Supprimer une tâche, après confirmation
+- ✅ Marquer une tâche comme terminée (case à cocher) : elle passe en bas de la liste, barrée
+- ✅ Enregistrement des tâches sur le téléphone (elles restent après fermeture)
 
 ---
 
@@ -112,9 +111,12 @@ Jest + Testing Library React Native. Les tests sont dans `__tests__/`, en miroir
 App.tsx              point de départ : thème, navigation, TanStack Query
 index.js             entrée de l'app : Reactotron, traduction, puis App
 src/
-  screens/           un fichier par écran
-  components/        composants réutilisables (FormInput)
-  components/ui/     boutons, cartes, champs de texte…
+  screens/           un fichier par écran (liste des tâches, formulaire)
+  components/        composants réutilisables (TodoItem, FormInput)
+  components/ui/     boutons, cartes, champs de texte, case à cocher…
+  models/            forme des données (une tâche)
+  schemas/           règles de validation des formulaires (Zod)
+  utils/             actions sur les tâches (ajouter, cocher, trier…)
   navigation/        liste des écrans et leurs types
   theme.ts           couleurs (clair + sombre), tailles, espacements
   store/             état partagé et stockage sur le téléphone (Jotai + MMKV)
@@ -122,6 +124,7 @@ src/
   config/            Reactotron, TanStack Query, URL de l'API
   i18n/              traduction (textes dans locales/fr.json)
 test-utils/          aides pour les tests
+__mocks__/           faux modules natifs pour les tests (MMKV)
 __tests__/           tests
 ```
 
