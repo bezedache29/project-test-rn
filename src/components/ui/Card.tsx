@@ -5,7 +5,7 @@ import { type Colors, radius, spacing, useThemedStyles } from '@/theme'
 
 type Props = {
   children: ReactNode
-  /** Makes the whole card tappable. */
+  /** Rend toute la carte cliquable. */
   onPress?: () => void
   style?: StyleProp<ViewStyle>
 }

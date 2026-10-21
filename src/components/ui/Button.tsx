@@ -24,7 +24,7 @@ type Variant = 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | '
 type Size = 'sm' | 'md' | 'lg' | 'icon' | 'iconSm'
 
 type Props = {
-  /** Shown as text, or used as the accessibility label for icon-only sizes. */
+  /** Affiché en texte, ou utilisé comme libellé d'accessibilité pour les tailles icône seule. */
   label: string
   icon?: LucideIcon
   onPress: () => void
@@ -65,7 +65,7 @@ export default function Button({
   return (
     <Pressable
       onPress={() => {
-        // Leaves the text field being edited, like a tap on empty space.
+        // Quitte le champ en cours de saisie, comme un appui dans le vide.
         Keyboard.dismiss()
         onPress()
       }}

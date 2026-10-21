@@ -2,8 +2,8 @@ import { useMemo } from 'react'
 import { useColorScheme } from 'react-native'
 
 /**
- * Single source of every visual value in the app (light + dark, follows the phone).
- * Token names follow shadcn/ui; neutral zinc palette with a green accent.
+ * Seule source des valeurs visuelles de l'app (clair + sombre, suit le téléphone).
+ * Noms de couleurs façon shadcn/ui ; palette neutre zinc avec un accent vert.
  */
 export const lightColors = {
   background: '#FFFFFF',
@@ -13,11 +13,11 @@ export const lightColors = {
   input: '#D4D4D8',
   foreground: '#09090B',
   mutedForeground: '#71717A',
-  /** Main actions and selected state. */
+  /** Actions principales et état sélectionné. */
   primary: '#16A34A',
   primaryForeground: '#FFFFFF',
   destructive: '#DC2626',
-  /** Soft red background so delete buttons don't shout next to the green. */
+  /** Fond rouge doux pour que les boutons de suppression ne crient pas à côté du vert. */
   destructiveMuted: '#FEE2E2',
 }
 
@@ -31,21 +31,21 @@ export const darkColors: Colors = {
   input: '#3F3F46',
   foreground: '#FAFAFA',
   mutedForeground: '#A1A1AA',
-  /** Slightly lighter green: #16A34A is too dark to read on a black background. */
+  /** Vert un peu plus clair : #16A34A est trop sombre pour être lisible sur fond noir. */
   primary: '#22C55E',
   primaryForeground: '#052E16',
   destructive: '#F87171',
   destructiveMuted: '#3B1219',
 }
 
-/** Palette matching the phone's light/dark setting. */
+/** Palette qui suit le réglage clair/sombre du téléphone. */
 export function useColors(): Colors {
   return useColorScheme() === 'dark' ? darkColors : lightColors
 }
 
 /**
- * Builds a component's styles from the current palette.
- * Styles are only rebuilt when the phone switches between light and dark.
+ * Construit les styles d'un composant à partir de la palette du moment.
+ * Les styles ne sont recalculés que quand le téléphone passe de clair à sombre.
  */
 export function useThemedStyles<T>(createStyles: (colors: Colors) => T): T {
   const colors = useColors()
@@ -83,7 +83,7 @@ export const iconSize = {
   lg: 24,
 }
 
-/** Heights shared by buttons and inputs so rows line up. */
+/** Hauteurs communes aux boutons et aux champs, pour que les lignes soient alignées. */
 export const controlHeight = {
   sm: 36,
   md: 44,

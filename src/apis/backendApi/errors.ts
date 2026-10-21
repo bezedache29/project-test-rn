@@ -2,7 +2,7 @@ import { isAxiosError } from 'axios'
 
 import i18n from '@/i18n'
 
-/** Readable French message for any error thrown by an API call. */
+/** Message lisible en français pour toute erreur levée par un appel API. */
 export function getApiErrorMessage(error: unknown): string {
   if (!isAxiosError(error)) return i18n.t('errors.unknown')
   if (!error.response) return i18n.t('errors.network')
@@ -12,7 +12,7 @@ export function getApiErrorMessage(error: unknown): string {
   return i18n.t('errors.unknown')
 }
 
-/** Field errors of a Laravel 422 response (already camelCase), ready for setError. */
+/** Erreurs par champ d'une réponse 422 de Laravel (déjà en camelCase), prêtes pour setError. */
 export function getValidationErrors(error: unknown): Record<string, string[]> | null {
   if (!isAxiosError(error) || error.response?.status !== 422) return null
   const errors = (error.response.data as { errors?: Record<string, string[]> } | undefined)?.errors

@@ -15,8 +15,8 @@ class MainActivity : ReactActivity() {
   override fun getMainComponentName(): String = "ProjectTestRn"
 
   /**
-   * Required by react-native-screens: avoids crashes when Android restores the activity
-   * after it was killed in the background.
+   * Demandé par react-native-screens : évite un plantage quand Android restaure l'activité
+   * après l'avoir tuée en arrière-plan.
    */
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(null)

@@ -9,7 +9,7 @@ type Props<T extends FieldValues> = Omit<TextInputProps, 'value' | 'onChangeText
   label?: string
 }
 
-/** Links a React Hook Form field to the app's Input (value, blur, error message). */
+/** Relie un champ React Hook Form à l'Input de l'app (valeur, sortie du champ, message d'erreur). */
 export default function FormInput<T extends FieldValues>({
   control,
   name,
