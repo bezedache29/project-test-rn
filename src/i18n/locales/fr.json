@@ -1,0 +1,17 @@
+{
+  "common": {
+    "retry": "Réessayer"
+  },
+  "home": {
+    "title": "Project Test RN",
+    "welcomeTitle": "Bienvenue",
+    "welcomeText": "Le projet est prêt. La liste des tâches arrive bientôt.",
+    "counterLabel": "Appuyé {{count}} fois"
+  },
+  "errors": {
+    "network": "Pas de connexion à internet. Vérifie ton réseau puis réessaie.",
+    "unauthorized": "Ta session a expiré. Reconnecte-toi.",
+    "server": "Le serveur a rencontré un problème. Réessaie dans quelques instants.",
+    "unknown": "Une erreur inattendue est survenue. Réessaie."
+  }
+}

@@ -1,0 +1,11 @@
+node_modules
+dist
+build
+coverage
+.env
+*.min.js
+package-lock.json
+android
+ios
+vendor
+.bundle
