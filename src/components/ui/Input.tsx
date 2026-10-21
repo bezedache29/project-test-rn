@@ -14,11 +14,11 @@ import {
 
 type Props = TextInputProps & {
   label?: string
-  /** Shown under the field; also turns its border red. */
+  /** Affiché sous le champ ; met aussi sa bordure en rouge. */
   error?: string
 }
 
-/** Text field with the app's look; the border lights up while typing. */
+/** Champ de texte au style de l'app ; la bordure s'allume pendant la saisie. */
 export default function Input({
   label,
   error,
@@ -52,7 +52,7 @@ export default function Input({
           onBlur?.(e)
         }}
         onContentSizeChange={(e) => {
-          // A growing multi-line field must stay above the keyboard.
+          // Un champ multiligne qui grandit doit rester au-dessus du clavier.
           if (focused && multiline) {
             reveal?.()
           }

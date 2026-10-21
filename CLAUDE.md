@@ -34,7 +34,7 @@ Jest + Testing Library React Native. Cible : Android.
   `refactoring/…`, `docs/…`, `test/…` (description en anglais, kebab-case). Vérifiées au push.
 - Commits au format conventionnel, **en anglais** : `feat: add login screen`.
   Types : `feat`, `fix`, `chore`, `refactor`, `docs`, `test`. Vérifiés par commitlint.
-- Hooks Husky : nom de branche + types + format au commit, nom de branche + tests au push. Ne jamais les
+- Hooks Husky : nom de branche + types + format au commit, nom de branche au push. Ne jamais les
   contourner (`--no-verify`).
 - Jamais de push direct sur `main` : branche `<type>/…`, puis PR vers `dev`.
 - Git et `gh` tournent **dans WSL** (Ubuntu) : les hooks utilisent le Node d'Ubuntu (nvm).
@@ -72,18 +72,20 @@ npm run format         # Prettier sur les .ts/.tsx
 App.tsx              providers (SafeArea, TanStack Query, navigation) puis RootNavigator
 index.js             point d'entrée : Reactotron, i18n, puis l'app
 src/
-  screens/           un fichier par écran (HomeScreen.tsx…)
+  screens/           un fichier par écran (TodoListScreen.tsx, TodoFormScreen.tsx)
   components/        composants métier réutilisables (FormInput…)
   components/ui/     composants d'interface génériques façon shadcn
   navigation/        RootNavigator.tsx + types.ts (types des paramètres de route)
   theme.ts           couleurs (clair + sombre), rayons, espacements, typo
   store/             atomes Jotai (atomWithMMKV.ts + <sujet>Atom.ts)
   apis/backendApi/   client axios + erreurs (dto/, mappers/, hooks/ à venir)
-  models/            types métier (un dossier par entité), créé avec la 1re entité
+  models/            types métier (un dossier par entité : todo/todo.model.ts)
+  schemas/           schémas Zod des formulaires (todoSchema.ts)
   config/            reactotron, queryClient, env
   i18n/              config i18next + locales/fr.json
-  utils/             helpers sans UI, créé au premier besoin
-test-utils/          helpers de tests (makeWrapper pour TanStack Query)
+  utils/             helpers sans UI (todos.ts : actions pures sur la liste)
+test-utils/          helpers de tests (query.tsx, jotai.tsx : makeStore, makeTodo)
+__mocks__/           mocks de modules natifs (react-native-mmkv)
 __tests__/           tests Jest, en miroir de src/
 ```
 
@@ -92,7 +94,8 @@ __tests__/           tests Jest, en miroir de src/
 - TypeScript strict, `any` interdit.
 - Prettier : guillemets simples, **pas de point-virgule**, virgules finales (es5),
   100 caractères par ligne.
-- Code, noms et commentaires en anglais ; **tout texte visible par l'utilisateur en français**.
+- Code et noms en anglais ; **commentaires toujours en français** ; **tout texte visible par
+  l'utilisateur en français**.
 - Commentaires seulement pour expliquer un « pourquoi » non évident.
 
 ## Mobile (React Native CLI, sans Expo)
@@ -101,11 +104,14 @@ __tests__/           tests Jest, en miroir de src/
 - Imports internes avec l'alias `@/` (= `src/`). Pas d'import relatif qui remonte (`../`).
 - Débogage : Reactotron (`src/config/reactotron.ts`, dev seulement). `npm run reactotron`
   une fois le téléphone branché. Les `console.log` partent dans Reactotron, pas dans Metro.
+- Zod 4 a besoin de `@babel/plugin-transform-export-namespace-from` (v7, comme Babel) dans
+  `babel.config.js`. Sans lui, Metro plante (« Export namespace should be first transformed »).
 - Tests : Jest + Testing Library React Native, dans `__tests__/` en miroir de `src/`.
   `render`, `renderHook` **et `fireEvent`** sont async : toujours `await`.
 - TypeScript strict, composants en fonctions, un composant exporté par défaut par fichier.
 - Styles avec `StyleSheet.create` en bas du fichier.
-- Code, noms et commentaires en anglais ; **tout texte visible par l'utilisateur en français**.
+- Code et noms en anglais ; **commentaires toujours en français** ; **tout texte visible par
+  l'utilisateur en français**.
 
 ## Interface (UI)
 
@@ -189,9 +195,13 @@ __tests__/           tests Jest, en miroir de src/
 - Tester le comportement (ce que l'utilisateur voit et fait, ce que la fonction renvoie),
   jamais les styles, l'implémentation interne ou les types.
 - Toute nouvelle fonctionnalité, tout bug corrigé, a son test. L'agent `testeur` les écrit.
-- Les tests tournent avant chaque push (hook Husky) : un push qui casse les tests est bloqué.
+- **Les tests sont lancés uniquement par l'agent `testeur`** (étape 1 du workflow commit) :
+  ni par un hook, ni en dehors de lui. Sur Windows, jamais depuis Ubuntu/WSL (disque `E:` trop
+  lent : les tests dépassent le délai de Jest).
 - Ordre de priorité quand le temps manque : logique pure (utils, mappers) → appels API →
   hooks → composants.
+- Écran qui utilise un atome : `makeJotaiWrapper(makeStore([...]))` en `wrapper` du `render`
+  (un store neuf par test). MMKV est remplacé par `__mocks__/react-native-mmkv.ts`.
 - Les vrais textes français sont chargés dans `jest.setup.js` (`@/i18n`) : les tests
   cherchent « Enregistrer », pas la clé.
 - Une lib native qui fait planter Jest (« Cannot use import statement outside a module ») :

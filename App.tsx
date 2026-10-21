@@ -12,7 +12,7 @@ export default function App() {
   const isDark = useColorScheme() === 'dark'
   const colors = useColors()
 
-  // Keeps React Navigation backgrounds and borders in line with our palette.
+  // Aligne les fonds et bordures de React Navigation sur notre palette.
   const navigationTheme = useMemo<Theme>(() => {
     const base = isDark ? DarkTheme : DefaultTheme
     return {

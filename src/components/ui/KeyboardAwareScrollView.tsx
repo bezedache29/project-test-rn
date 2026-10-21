@@ -12,18 +12,18 @@ import {
 
 import { spacing } from '@/theme'
 
-/** Space kept between the focused field and the top of the keyboard. */
+/** Espace gardé entre le champ actif et le haut du clavier. */
 const MARGIN = spacing.xl
 
 const RevealContext = createContext<(() => void) | null>(null)
 
-/** Lets an input ask the surrounding scroll view to bring it above the keyboard. */
+/** Permet à un champ de demander à la zone de défilement de le remonter au-dessus du clavier. */
 export const useRevealOnFocus = () => useContext(RevealContext)
 
 /**
- * ScrollView that keeps the focused field visible above the keyboard.
- * Android draws the app behind the keyboard (edge-to-edge), so the screen does
- * not shrink by itself: this adds room at the bottom and scrolls the field up.
+ * ScrollView qui garde le champ actif visible au-dessus du clavier.
+ * Android dessine l'app derrière le clavier (edge-to-edge), donc l'écran ne
+ * rétrécit pas tout seul : on ajoute de la place en bas et on remonte le champ.
  */
 export default function KeyboardAwareScrollView({ children, onScroll, ...props }: ScrollViewProps) {
   const scrollRef = useRef<ScrollViewInstance>(null)
@@ -52,7 +52,7 @@ export default function KeyboardAwareScrollView({ children, onScroll, ...props }
     const show = Keyboard.addListener('keyboardDidShow', (event) => {
       keyboardTop.current = event.endCoordinates.screenY
       setKeyboardHeight(event.endCoordinates.height)
-      // Waits for the extra bottom space to be laid out before scrolling.
+      // Attend que l'espace ajouté en bas soit en place avant de défiler.
       requestAnimationFrame(reveal)
     })
     const hide = Keyboard.addListener('keyboardDidHide', () => {
@@ -73,8 +73,8 @@ export default function KeyboardAwareScrollView({ children, onScroll, ...props }
     [onScroll]
   )
 
-  // An input focused while the keyboard is already open has no keyboard
-  // event: it calls this itself (see Input).
+  // Un champ activé alors que le clavier est déjà ouvert ne reçoit pas d'événement
+  // clavier : il appelle cette fonction lui-même (voir Input).
   const revealSoon = useMemo(() => () => setTimeout(reveal, 50), [reveal])
 
   return (

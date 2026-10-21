@@ -1,12 +1,30 @@
 {
   "common": {
-    "retry": "Réessayer"
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "retry": "Réessayer",
+    "save": "Enregistrer"
   },
-  "home": {
-    "title": "Project Test RN",
-    "welcomeTitle": "Bienvenue",
-    "welcomeText": "Le projet est prêt. La liste des tâches arrive bientôt.",
-    "counterLabel": "Appuyé {{count}} fois"
+  "todoList": {
+    "title": "Mes tâches",
+    "add": "Ajouter une tâche",
+    "remaining_one": "{{count}} tâche restante",
+    "remaining_other": "{{count}} tâches restantes",
+    "allDone": "Tout est fait, bravo !",
+    "emptyTitle": "Aucune tâche pour l'instant",
+    "emptyText": "Ajoute ta première tâche pour commencer.",
+    "toggleLabel": "Marquer « {{title}} » comme terminée",
+    "deleteLabel": "Supprimer « {{title}} »",
+    "deleteConfirmTitle": "Supprimer cette tâche ?",
+    "deleteConfirmText": "« {{title}} » sera définitivement supprimée."
+  },
+  "todoForm": {
+    "createTitle": "Nouvelle tâche",
+    "editTitle": "Modifier la tâche",
+    "titleLabel": "Titre",
+    "titlePlaceholder": "Ex. : Acheter du pain",
+    "titleRequired": "Écris un titre pour ta tâche.",
+    "titleTooLong": "{{max}} caractères maximum."
   },
   "errors": {
     "network": "Pas de connexion à internet. Vérifie ton réseau puis réessaie.",
