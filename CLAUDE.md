@@ -34,7 +34,7 @@ Jest + Testing Library React Native. Cible : Android.
   `refactoring/…`, `docs/…`, `test/…` (description en anglais, kebab-case). Vérifiées au push.
 - Commits au format conventionnel, **en anglais** : `feat: add login screen`.
   Types : `feat`, `fix`, `chore`, `refactor`, `docs`, `test`. Vérifiés par commitlint.
-- Hooks Husky : nom de branche + types + format au commit, nom de branche + tests au push. Ne jamais les
+- Hooks Husky : nom de branche + types + format au commit, nom de branche au push. Ne jamais les
   contourner (`--no-verify`).
 - Jamais de push direct sur `main` : branche `<type>/…`, puis PR vers `dev`.
 - Git et `gh` tournent **dans WSL** (Ubuntu) : les hooks utilisent le Node d'Ubuntu (nvm).
@@ -195,7 +195,9 @@ __tests__/           tests Jest, en miroir de src/
 - Tester le comportement (ce que l'utilisateur voit et fait, ce que la fonction renvoie),
   jamais les styles, l'implémentation interne ou les types.
 - Toute nouvelle fonctionnalité, tout bug corrigé, a son test. L'agent `testeur` les écrit.
-- Les tests tournent avant chaque push (hook Husky) : un push qui casse les tests est bloqué.
+- **Les tests sont lancés uniquement par l'agent `testeur`** (étape 1 du workflow commit) :
+  ni par un hook, ni en dehors de lui. Sur Windows, jamais depuis Ubuntu/WSL (disque `E:` trop
+  lent : les tests dépassent le délai de Jest).
 - Ordre de priorité quand le temps manque : logique pure (utils, mappers) → appels API →
   hooks → composants.
 - Écran qui utilise un atome : `makeJotaiWrapper(makeStore([...]))` en `wrapper` du `render`

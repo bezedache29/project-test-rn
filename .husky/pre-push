@@ -1,2 +1,1 @@
 npx --no-install validate-branch-name
-npx --no-install jest --passWithNoTests --forceExit

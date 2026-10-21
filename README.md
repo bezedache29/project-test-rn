@@ -136,5 +136,6 @@ __tests__/           tests
   `refactoring/…`, `docs/…`, `test/…`.
 - Commits [Conventional Commits](https://www.conventionalcommits.org) en anglais
   (`feat: add login screen`), vérifiés par commitlint.
-- Hooks Husky : nom de branche, types et format au commit ; nom de branche et tests au push.
+- Hooks Husky : nom de branche, types et format au commit ; nom de branche au push. Les tests
+  sont lancés par l'agent `testeur` avant chaque commit.
 - Chaque PR vise `dev` ; `main` ne reçoit que des releases depuis `dev`.
